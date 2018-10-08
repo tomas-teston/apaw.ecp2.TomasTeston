@@ -12,7 +12,7 @@
 * GitHub
 
 ## Diseño de entidades
-![themes-architecture-diagram](https://github.com/miw-upm/APAW-themes-layers/blob/develop/docs/themes-entities-class-diagram.png)
+[![UML](https://github.com/tomas-teston/apaw.ecp2.TomasTeston/blob/master/src/main/resources/modeloDominio.png)](https://github.com/tomas-teston/apaw.ecp2.TomasTeston/blob/master/src/main/resources/modeloDominio.png)
 
 ## Arquitectura
 ![themes-entities-class-diagram](https://github.com/miw-upm/APAW-themes-layers/blob/develop/docs/themes-architecture-diagram.png)
