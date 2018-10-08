@@ -12,4 +12,4 @@ notifications:
 script:
 - mvn verify
 - mvn org.jacoco:jacoco-maven-plugin:prepare-agent verify
-- mvn sonar:sonar -Dsonar.organization=tomas-teston-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$APAW-ECP2
+- mvn sonar:sonar -Dsonar.organization=tomas-teston-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$APAWECP2
