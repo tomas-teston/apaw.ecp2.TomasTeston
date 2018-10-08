@@ -99,4 +99,3 @@
   - `[ {id:String, nombre:String, edad:Integer} ]`
 - 403 BAD_REQUEST
 ---
-
