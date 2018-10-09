@@ -1,8 +1,10 @@
 package api;
 
+import api.apiControllers.EmpleadoApiController;
 import api.apiControllers.JefeApiController;
 import api.daos.DaoFactory;
 import api.daos.memory.DaoMemoryFactory;
+import api.dtos.EmpleadoCreationDto;
 import api.dtos.JefeDto;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
@@ -11,8 +13,6 @@ import http.HttpRequest;
 import http.HttpResponse;
 import http.HttpStatus;
 
-import static http.HttpMethod.PUT;
-
 public class Dispatcher {
 
     static {
@@ -20,6 +20,8 @@ public class Dispatcher {
     }
 
     private JefeApiController jefeApiController = new JefeApiController();
+
+    private EmpleadoApiController empleadoApiController = new EmpleadoApiController();
 
 
     public void submit(HttpRequest request, HttpResponse response) {
@@ -52,6 +54,8 @@ public class Dispatcher {
     private void doPost(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(JefeApiController.JEFES)) {
             response.setBody(this.jefeApiController.create((JefeDto) request.getBody()));
+        } else if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS)) {
+            response.setBody(this.empleadoApiController.create((EmpleadoCreationDto) request.getBody()));
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }

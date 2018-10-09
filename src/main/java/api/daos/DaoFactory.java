@@ -18,4 +18,6 @@ public abstract class DaoFactory {
     }
 
     public abstract JefeDao getJefeDao();
+
+    public abstract EmpleadoDao getEmpleadoDao();
 }

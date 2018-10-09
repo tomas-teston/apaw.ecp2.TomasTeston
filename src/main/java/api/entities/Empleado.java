@@ -13,7 +13,7 @@ public class Empleado {
     private Jefe jefe;
 
     public Empleado() {
-        this.id = "";
+        this.id = null;
         this.nombre = "";
         this.edad = 0;
         this.nominas = new ArrayList<>();
@@ -27,8 +27,20 @@ public class Empleado {
         this.id = id;
     }
 
+    public Empleado(String nombre, int edad, Departamento departamento, Jefe jefe) {
+        this();
+        this.nombre = nombre;
+        this.edad = edad;
+        this.departamento = departamento;
+        this.jefe = jefe;
+    }
+
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Departamento getDepartamento() {
