@@ -8,7 +8,6 @@ public class Nomina {
         this.salario = 0.0;
         this.cobrada = false;
     }
-
     public Nomina(Double salario, boolean cobrada) {
         this.salario = salario;
         this.cobrada = cobrada;

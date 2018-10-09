@@ -13,6 +13,8 @@ public class EmpleadoApiController {
 
     public static final String ID_ID = "/{id}";
 
+    public static final String NOMINAS = "/nominas";
+
     private EmpleadoBusinessController empleadoBusinessController = new EmpleadoBusinessController();
 
     public String create(EmpleadoCreationDto empleadoCreationDto) {
@@ -28,6 +30,14 @@ public class EmpleadoApiController {
 
     public void delete(String id) {
         this.empleadoBusinessController.delete(id);
+    }
+
+    public void createNomina(String nominaId, Double salario){
+        this.validate(salario, "salario");
+        if (salario < 0) {
+            throw new ArgumentNotValidException("the salary must be greater than 0");
+        }
+        this.empleadoBusinessController.createNomina(nominaId, salario);
     }
 
     private void validate(Object property, String message) {

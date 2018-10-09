@@ -9,6 +9,8 @@ import api.dtos.EmpleadoCreationDto;
 import api.dtos.EmpleadoListAllDto;
 import api.entities.Empleado;
 import api.entities.Jefe;
+import api.entities.Nomina;
+import api.entities.NominaBuilder;
 import api.exceptions.NotFoundException;
 
 public class EmpleadoBusinessController {
@@ -31,6 +33,13 @@ public class EmpleadoBusinessController {
             listAllDto.add(new EmpleadoListAllDto(empleado.getId(), empleado.getNombre(), empleado.getEdad()));
         }
         return listAllDto;
+    }
+
+    public void createNomina(String nominaId, Double salario) {
+        Empleado empleado = DaoFactory.getFactory().getEmpleadoDao().read(nominaId)
+                .orElseThrow(() -> new NotFoundException("Empleado (" + nominaId + ")"));
+        empleado.getNominas().add(new NominaBuilder().salario(salario).build());
+        DaoFactory.getFactory().getEmpleadoDao().save(empleado);
     }
 
     public void delete(String id) {
