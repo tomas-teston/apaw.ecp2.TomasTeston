@@ -72,4 +72,29 @@ class EmpleadoTest {
         assertTrue(((List<EmpleadoListAllDto>) new Client().submit(request1).getBody()).size() < count);
     }
 
+    @Test
+    void testNominaEmpleado() {
+        String id = this.createEmpleado("Manuel", 30);
+        nominaEmpleado(id, 1500);
+    }
+
+    private void nominaEmpleado(String emmpleadoId, double salario) {
+        HttpRequest request = HttpRequest.builder(EmpleadoApiController.EMPLEADOS).path(EmpleadoApiController.ID_ID)
+                .expandPath(emmpleadoId).path(EmpleadoApiController.NOMINAS).body(salario).post();
+        new Client().submit(request);
+    }
+
+    @Test
+    void testNominaEmpleadoEmpleadoIdNotFound() {
+        HttpException exception = assertThrows(HttpException.class, () -> this.nominaEmpleado("h3rFdEsw", 5000));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
+    @Test
+    void testNominaEmpleadoNominaSalaryGreaterThan0() {
+        String id = this.createEmpleado("Manuel", 30);
+        HttpException exception = assertThrows(HttpException.class, () -> this.nominaEmpleado("h3rFdEsw", -1));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
+
 }

@@ -62,6 +62,8 @@ public class Dispatcher {
             response.setBody(this.jefeApiController.create((JefeDto) request.getBody()));
         } else if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS)) {
             response.setBody(this.empleadoApiController.create((EmpleadoCreationDto) request.getBody()));
+        } else if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID + EmpleadoApiController.NOMINAS)) {
+            this.empleadoApiController.createNomina(request.getPath(1), (Double) request.getBody());
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
