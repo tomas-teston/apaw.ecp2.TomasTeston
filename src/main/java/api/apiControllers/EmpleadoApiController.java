@@ -5,6 +5,7 @@ import java.util.List;
 import api.businessController.EmpleadoBusinessController;
 import api.dtos.EmpleadoCreationDto;
 import api.dtos.EmpleadoListAllDto;
+import api.entities.Departamento;
 import api.exceptions.ArgumentNotValidException;
 
 public class EmpleadoApiController {
@@ -14,6 +15,10 @@ public class EmpleadoApiController {
     public static final String ID_ID = "/{id}";
 
     public static final String NOMINAS = "/nominas";
+
+    public static final String DEPARTAMENTO = "/departamento";
+
+
 
     private EmpleadoBusinessController empleadoBusinessController = new EmpleadoBusinessController();
 
@@ -38,6 +43,11 @@ public class EmpleadoApiController {
             throw new ArgumentNotValidException("the salary must be greater than 0");
         }
         this.empleadoBusinessController.createNomina(nominaId, salario);
+    }
+
+    public void updateDepartamento(String empleadoId, Departamento departamento) {
+        this.validate(departamento, "departamento");
+        this.empleadoBusinessController.updateCategory(empleadoId, departamento);
     }
 
     private void validate(Object property, String message) {

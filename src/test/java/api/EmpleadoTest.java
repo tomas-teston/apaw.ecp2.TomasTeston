@@ -97,4 +97,12 @@ class EmpleadoTest {
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
 
+    @Test
+    void testUpdateDepartamento() {
+        String id = this.createEmpleado("Manuel", 30);
+        HttpRequest request = HttpRequest.builder(EmpleadoApiController.EMPLEADOS).path(EmpleadoApiController.ID_ID)
+                .expandPath(id).path(EmpleadoApiController.DEPARTAMENTO).body(Departamento.RRHH).patch();
+        new Client().submit(request);
+    }
+
 }

@@ -6,6 +6,7 @@ import api.daos.DaoFactory;
 import api.daos.memory.DaoMemoryFactory;
 import api.dtos.EmpleadoCreationDto;
 import api.dtos.JefeDto;
+import api.entities.Departamento;
 import api.exceptions.ArgumentNotValidException;
 import api.exceptions.NotFoundException;
 import api.exceptions.RequestInvalidException;
@@ -39,6 +40,9 @@ public class Dispatcher {
                     break;
                 case DELETE:
                     this.doDelete(request);
+                    break;
+                case PATCH:
+                    this.doPatch(request);
                     break;
                 default: // Unexpected
                     throw new RequestInvalidException("method error: " + request.getMethod());
@@ -88,6 +92,14 @@ public class Dispatcher {
     private void doDelete(HttpRequest request) {
         if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID)) {
             this.empleadoApiController.delete(request.getPath(1));
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
+
+    private void doPatch(HttpRequest request) {
+        if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID + EmpleadoApiController.DEPARTAMENTO)) {
+            this.empleadoApiController.updateDepartamento(request.getPath(1), (Departamento) request.getBody());
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }
