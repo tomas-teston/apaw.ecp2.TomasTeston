@@ -17,4 +17,11 @@ public class EmpleadoDaoMemory extends GenericDaoMemory<Empleado> implements Emp
     public void setId(Empleado empleado, String id) {
         empleado.setId(id);
     }
+
+    @Override
+    public List<Empleado> findByNominasNotEmpty() {
+        return this.findAll().stream()
+                .filter(empleado -> !empleado.getNominas().isEmpty())
+                .collect(Collectors.toList());
+    }
 }

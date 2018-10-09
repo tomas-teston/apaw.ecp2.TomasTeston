@@ -105,4 +105,37 @@ class EmpleadoTest {
         new Client().submit(request);
     }
 
+    @Test
+    void testSearchAverage() {
+        String id = this.createEmpleado("Manuel", 30);
+        this.nominaEmpleado(id, 5);
+        this.nominaEmpleado(id, 10);
+        HttpRequest request = HttpRequest.builder(EmpleadoApiController.EMPLEADOS).path(EmpleadoApiController.SEARCH)
+                .param("q", "average:>=7").get();
+        List<EmpleadoListAllDto> empleados = (List<EmpleadoListAllDto>) new Client().submit(request).getBody();
+        assertFalse(empleados.isEmpty());
+    }
+
+    @Test
+    void testSearchAverageWithoutParamQ() {
+        String id = this.createEmpleado("Manuel", 30);
+        this.nominaEmpleado(id, 5);
+        this.nominaEmpleado(id, 10);
+        HttpRequest request = HttpRequest.builder(EmpleadoApiController.EMPLEADOS).path(EmpleadoApiController.SEARCH)
+                .param("error", "average:>=7").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
+
+    @Test
+    void testSearchAverageParamError() {
+        String id = this.createEmpleado("Manuel", 30);
+        this.nominaEmpleado(id, 5);
+        this.nominaEmpleado(id, 10);
+        HttpRequest request = HttpRequest.builder(EmpleadoApiController.EMPLEADOS).path(EmpleadoApiController.SEARCH)
+                .param("error", "error:>=7").get();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
+
 }

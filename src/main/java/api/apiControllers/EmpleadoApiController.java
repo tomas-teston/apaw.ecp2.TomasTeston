@@ -18,7 +18,7 @@ public class EmpleadoApiController {
 
     public static final String DEPARTAMENTO = "/departamento";
 
-
+    public static final String SEARCH = "/search";
 
     private EmpleadoBusinessController empleadoBusinessController = new EmpleadoBusinessController();
 
@@ -48,6 +48,14 @@ public class EmpleadoApiController {
     public void updateDepartamento(String empleadoId, Departamento departamento) {
         this.validate(departamento, "departamento");
         this.empleadoBusinessController.updateCategory(empleadoId, departamento);
+    }
+
+    public List<EmpleadoListAllDto> find(String query) {
+        this.validate(query, "query param q");
+        if (!"average".equals(query.split(":>=")[0])) {
+            throw new ArgumentNotValidException("query param q is incorrect, missing 'average:>='");
+        }
+        return this.empleadoBusinessController.findByAverageGreaterThanEqual(Double.valueOf(query.split(":>=")[1]));
     }
 
     private void validate(Object property, String message) {
