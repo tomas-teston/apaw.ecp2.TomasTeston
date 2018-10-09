@@ -11,6 +11,8 @@ public class EmpleadoApiController {
 
     public static final String EMPLEADOS = "/empleados";
 
+    public static final String ID_ID = "/{id}";
+
     private EmpleadoBusinessController empleadoBusinessController = new EmpleadoBusinessController();
 
     public String create(EmpleadoCreationDto empleadoCreationDto) {
@@ -22,6 +24,10 @@ public class EmpleadoApiController {
 
     public List<EmpleadoListAllDto> readAll() {
         return this.empleadoBusinessController.readAll();
+    }
+
+    public void delete(String id) {
+        this.empleadoBusinessController.delete(id);
     }
 
     private void validate(Object property, String message) {

@@ -33,4 +33,8 @@ public class EmpleadoBusinessController {
         return listAllDto;
     }
 
+    public void delete(String id) {
+        DaoFactory.getFactory().getEmpleadoDao().deleteById(id);
+    }
+
 }

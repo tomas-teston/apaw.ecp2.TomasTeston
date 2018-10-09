@@ -10,7 +10,6 @@ import api.dtos.EmpleadoCreationDto;
 import api.dtos.EmpleadoListAllDto;
 import api.dtos.JefeDto;
 import api.entities.Departamento;
-import api.entities.Empleado;
 import http.Client;
 import http.HttpException;
 import http.HttpRequest;
@@ -60,6 +59,17 @@ class EmpleadoTest {
         HttpRequest request = HttpRequest.builder(EmpleadoApiController.EMPLEADOS).get();
         List<EmpleadoListAllDto> empleados = (List<EmpleadoListAllDto>) new Client().submit(request).getBody();
         assertTrue(empleados.size() >= 5);
+    }
+
+    @Test
+    void testDelete() {
+        String id = this.createEmpleado("Manuel", 30);
+        HttpRequest request1 = HttpRequest.builder(EmpleadoApiController.EMPLEADOS).get();
+        int count = ((List<EmpleadoListAllDto>) new Client().submit(request1).getBody()).size();
+        HttpRequest request2 = HttpRequest.builder(EmpleadoApiController.EMPLEADOS).path(JefeApiController.ID_ID)
+                .expandPath(id).delete();
+        new Client().submit(request2);
+        assertTrue(((List<EmpleadoListAllDto>) new Client().submit(request1).getBody()).size() < count);
     }
 
 }

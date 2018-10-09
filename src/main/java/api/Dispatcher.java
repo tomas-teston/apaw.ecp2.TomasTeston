@@ -37,6 +37,9 @@ public class Dispatcher {
                 case GET:
                     this.doGet(request, response);
                     break;
+                case DELETE:
+                    this.doDelete(request);
+                    break;
                 default: // Unexpected
                     throw new RequestInvalidException("method error: " + request.getMethod());
             }
@@ -80,6 +83,12 @@ public class Dispatcher {
         }
     }
 
-
+    private void doDelete(HttpRequest request) {
+        if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.ID_ID)) {
+            this.empleadoApiController.delete(request.getPath(1));
+        } else {
+            throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
+        }
+    }
 
 }
