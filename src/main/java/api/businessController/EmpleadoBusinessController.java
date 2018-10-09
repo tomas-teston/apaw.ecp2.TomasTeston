@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import api.daos.DaoFactory;
 import api.dtos.EmpleadoCreationDto;
 import api.dtos.EmpleadoListAllDto;
+import api.entities.Departamento;
 import api.entities.Empleado;
 import api.entities.Jefe;
 import api.entities.Nomina;
@@ -44,6 +45,13 @@ public class EmpleadoBusinessController {
 
     public void delete(String id) {
         DaoFactory.getFactory().getEmpleadoDao().deleteById(id);
+    }
+
+    public void updateCategory(String empleadoId, Departamento departamento) {
+        Empleado empleado = DaoFactory.getFactory().getEmpleadoDao().read(empleadoId)
+                .orElseThrow(() -> new NotFoundException("Empleado (" + empleadoId + ")"));
+        empleado.setDepartamento(departamento);
+        DaoFactory.getFactory().getEmpleadoDao().save(empleado);
     }
 
 }
