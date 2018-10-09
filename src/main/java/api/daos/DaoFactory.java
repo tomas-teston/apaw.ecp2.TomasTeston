@@ -16,4 +16,6 @@ public abstract class DaoFactory {
         LogManager.getLogger(DaoFactory.class).debug("   create DaoMemoryFactory");
 
     }
+
+    public abstract JefeDao getJefeDao();
 }
