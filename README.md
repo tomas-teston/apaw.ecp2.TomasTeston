@@ -58,7 +58,8 @@
 #### Parámetros del cuerpo
 - `nombre`: String (**requerido**)
 - `edad`: Integer (**requerido**)
-- `nomina`: Nomina
+- `departamento`: Departamento
+- `jefeId`: String
 #### Respuesta
 - 200 OK 
 - 403 BAD_REQUEST
