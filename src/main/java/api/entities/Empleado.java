@@ -22,9 +22,11 @@ public class Empleado {
 
     }
 
-    public Empleado(String id) {
+    public Empleado(String id, String nombre, int edad) {
         this();
         this.id = id;
+        this.nombre = nombre;
+        this.edad = edad;
     }
 
     public Empleado(String nombre, int edad, Departamento departamento, Jefe jefe) {

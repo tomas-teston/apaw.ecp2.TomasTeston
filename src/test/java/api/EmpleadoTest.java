@@ -1,12 +1,16 @@
 package api;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import api.apiControllers.EmpleadoApiController;
 import api.apiControllers.JefeApiController;
 import api.dtos.EmpleadoCreationDto;
+import api.dtos.EmpleadoListAllDto;
 import api.dtos.JefeDto;
 import api.entities.Departamento;
+import api.entities.Empleado;
 import http.Client;
 import http.HttpException;
 import http.HttpRequest;
@@ -46,6 +50,16 @@ class EmpleadoTest {
         HttpRequest request = HttpRequest.builder(EmpleadoApiController.EMPLEADOS)
                 .body(new EmpleadoCreationDto("Manuel", 30,  null, null)).post();
         new Client().submit(request);
+    }
+
+    @Test
+    void testReadAll() {
+        for (int i = 0; i < 5; i++) {
+            this.createEmpleado("Empleado - " + i, 30+i);
+        }
+        HttpRequest request = HttpRequest.builder(EmpleadoApiController.EMPLEADOS).get();
+        List<EmpleadoListAllDto> empleados = (List<EmpleadoListAllDto>) new Client().submit(request).getBody();
+        assertTrue(empleados.size() >= 5);
     }
 
 }

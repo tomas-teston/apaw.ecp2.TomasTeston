@@ -65,12 +65,9 @@
 - 403 BAD_REQUEST
 ---
 ### GET /empleados
-#### Parámetros del cuerpo
-- `id`: String (**requerido**)
 #### Respuesta
 - 200 OK 
   - `[ {id:String, nombre:String, edad:Integer} ]`: String
-- 404 NOT_FOUND
 ---
 ### DELETE /empleados/{id}
 #### Respuesta
