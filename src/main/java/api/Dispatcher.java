@@ -84,6 +84,8 @@ public class Dispatcher {
     private void doGet(HttpRequest request, HttpResponse response) {
         if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS)) {
             response.setBody(this.empleadoApiController.readAll());
+        } else if (request.isEqualsPath(EmpleadoApiController.EMPLEADOS + EmpleadoApiController.SEARCH)) {
+            response.setBody(this.empleadoApiController.find(request.getParams().get("q")));
         } else {
             throw new RequestInvalidException("request error: " + request.getMethod() + ' ' + request.getPath());
         }

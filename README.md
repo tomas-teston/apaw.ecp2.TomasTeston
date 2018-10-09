@@ -90,7 +90,7 @@
 - 403 BAD_REQUEST
 - 404 NOT_FOUND
 ---
-### GET /empleados/search?q=edad:>=30
+### GET /empleados/search?q=average:>=30
 #### Respuesta
 - 200 OK
   - `[ {id:String, nombre:String, edad:Integer} ]`
