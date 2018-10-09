@@ -77,7 +77,6 @@
 ### POST /empleados/{id}/nominas
 #### Parámetros del cuerpo
 - `salario`: Double (**requerido**)
-- `cobrada`: Boolean
 #### Respuesta
 - 200 OK 
 - 403 BAD_REQUEST
