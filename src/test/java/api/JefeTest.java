@@ -53,4 +53,29 @@ public class JefeTest {
         assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
     }
 
+    @Test
+    void testUpdateJefe() {
+        String id = this.createJefe();
+        HttpRequest request = HttpRequest.builder(JefeApiController.JEFES).path(JefeApiController.ID_ID)
+                .expandPath(id).body(new JefeDto("Cambiado", "918551347")).put();
+        new Client().submit(request);
+    }
+
+    @Test
+    void testUpdateUserWithoutUserDto() {
+        String id = this.createJefe();
+        HttpRequest request = HttpRequest.builder(JefeApiController.JEFES).path(JefeApiController.ID_ID)
+                .expandPath(id).body(null).put();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.BAD_REQUEST, exception.getHttpStatus());
+    }
+
+    @Test
+    void testUpdateUserNotFoundException() {
+        HttpRequest request = HttpRequest.builder(JefeApiController.JEFES).path(JefeApiController.ID_ID)
+                .expandPath("s5FdeGf54D").body(new JefeDto("Cambiado", "918551347")).put();
+        HttpException exception = assertThrows(HttpException.class, () -> new Client().submit(request));
+        assertEquals(HttpStatus.NOT_FOUND, exception.getHttpStatus());
+    }
+
 }
