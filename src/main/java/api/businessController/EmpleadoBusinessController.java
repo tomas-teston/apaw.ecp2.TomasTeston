@@ -54,7 +54,7 @@ public class EmpleadoBusinessController {
         DaoFactory.getFactory().getEmpleadoDao().save(empleado);
     }
 
-    public List<EmpleadoListAllDto> findByAverageGreaterThanEqual(Double value) {
+    public List<EmpleadoListAllDto> findBySalaryAverageGreaterThanEqual(Double value) {
         List<EmpleadoListAllDto> empleados = DaoFactory.getFactory().getEmpleadoDao().findByNominasNotEmpty().stream()
                 .filter(empleadao -> this.average(empleadao) >= value)
                 .map((empleado) -> new EmpleadoListAllDto(empleado.getId(), empleado.getNombre(), empleado.getEdad())).collect(Collectors.toList());

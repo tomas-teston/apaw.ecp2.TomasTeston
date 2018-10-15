@@ -106,7 +106,7 @@ class EmpleadoTest {
     }
 
     @Test
-    void testSearchAverage() {
+    void testSearchSalaryAverage() {
         String id = this.createEmpleado("Manuel", 30);
         this.nominaEmpleado(id, 5);
         this.nominaEmpleado(id, 10);
@@ -117,7 +117,7 @@ class EmpleadoTest {
     }
 
     @Test
-    void testSearchAverageWithoutParamQ() {
+    void testSearchSalaryAverageWithoutParamQ() {
         String id = this.createEmpleado("Manuel", 30);
         this.nominaEmpleado(id, 5);
         this.nominaEmpleado(id, 10);
@@ -128,7 +128,7 @@ class EmpleadoTest {
     }
 
     @Test
-    void testSearchAverageParamError() {
+    void testSearchSalaryAverageParamError() {
         String id = this.createEmpleado("Manuel", 30);
         this.nominaEmpleado(id, 5);
         this.nominaEmpleado(id, 10);

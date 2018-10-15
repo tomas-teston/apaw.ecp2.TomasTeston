@@ -55,7 +55,7 @@ public class EmpleadoApiController {
         if (!"average".equals(query.split(":>=")[0])) {
             throw new ArgumentNotValidException("query param q is incorrect, missing 'average:>='");
         }
-        return this.empleadoBusinessController.findByAverageGreaterThanEqual(Double.valueOf(query.split(":>=")[1]));
+        return this.empleadoBusinessController.findBySalaryAverageGreaterThanEqual(Double.valueOf(query.split(":>=")[1]));
     }
 
     private void validate(Object property, String message) {
